@@ -1,14 +1,10 @@
-import os
 from io import BytesIO
 import PyPDF2
 from flask import Flask, render_template, request, redirect, session, make_response, send_file, send_from_directory
-# from werkzeug import secure_filename
+
 app = Flask(__name__)
 
-UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['pdf','PDF'])
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# app.config['SECRET_KEY'] = os.urandom(24)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -57,7 +53,7 @@ def show_pdf():
 
             output_filename = send_data.filename +'-output.pdf'
 
-            return send_file(outfile,mimetype='application/pdf',download_name=output_filename)
+            return send_file(outfile,mimetype='application/pdf',download_name=output_filename, as_attachment=True)
 
             # return render_template('pdf.html', result=result)
 
