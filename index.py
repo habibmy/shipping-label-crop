@@ -21,27 +21,27 @@ def show_pdf():
         send_data = request.files['send_data']
         if send_data and allowed_file(send_data.filename):
             
-            output_pdf = PyPDF2.PdfFileWriter()
+            output_pdf = PyPDF2.PdfWriter()
 
-            pdf  = PyPDF2.PdfFileReader(send_data)
-            pdf2  = PyPDF2.PdfFileReader(send_data)
+            pdf  = PyPDF2.PdfReader(send_data)
+            pdf2  = PyPDF2.PdfReader(send_data)
 
-            numPages = pdf.getNumPages()
+            numPages = len(pdf.pages)
 
             for i in range(numPages):
 
                 shipping_label = pdf.pages[i]
                 invoice = pdf2.pages[i]
-                shipping_label.cropBox.lowerLeft=(168,478)
-                shipping_label.cropBox.upperRight = (430,820)
+                shipping_label.cropbox.lower_left=(185,458)
+                shipping_label.cropbox.upper_right = (410,820)
                 
-                invoice.cropBox.lowerLeft=(0,78)
-                invoice.cropBox.upperRight = (800,470)
+                invoice.cropbox.lower_left=(0,78)
+                invoice.cropbox.upper_right = (800,455)
 
 
-                output_pdf.addPage(shipping_label)
+                output_pdf.add_page(shipping_label)
 
-                output_pdf.addPage(invoice)
+                output_pdf.add_page(invoice)
 
             #this works
             # outputStream = open(r"output.pdf", "wb")

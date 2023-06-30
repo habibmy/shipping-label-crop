@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 flask = "==2.1.2"
-pypdf2 = "==1.27.12"
+pypdf2 = "==3.0.0"
 
 [dev-packages]
 
